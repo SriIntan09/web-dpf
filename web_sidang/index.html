@@ -1,0 +1,2468 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Web Kesehatan Gratis Djalaluddin Pane Foundation</title>
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <style>
+      /* GLOBAL */
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      body {
+        font-family: "Poppins", sans-serif;
+        background: #f4f7fb;
+        overflow-x: hidden;
+      }
+
+      /* PAGE SYSTEM */
+      .page {
+        display: none;
+      }
+      .page.active {
+        display: block;
+      }
+
+      /* CONTAINER */
+      .container {
+        width: 92%;
+        margin: auto;
+        padding: 25px 0;
+      }
+
+      /* HEADER */
+      .header {
+        position: relative;
+        background: linear-gradient(90deg, #2bb673, #2d8cff);
+        border-radius: 22px;
+        padding: 5px 5px 5px;
+        overflow: hidden;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+      }
+      .header::before {
+        content: "";
+        position: absolute;
+        width: 450px;
+        height: 450px;
+        background: rgba(255, 255, 255, 0.07);
+        border-radius: 50%;
+        top: -220px;
+        left: -120px;
+      }
+      .header-content {
+        position: relative;
+        z-index: 2;
+        text-align: center;
+        color: white;
+      }
+      .header h1 {
+        font-size: 34px;
+        font-weight: 700;
+        margin-bottom: 10px;
+      }
+      .header p {
+        font-size: 16px;
+        opacity: 0.95;
+      }
+
+      /* LOGO */
+      .logo {
+        width: 80px;
+        height: 80px;
+        background: white;
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: auto;
+        margin-bottom: 18px;
+        overflow: hidden;
+      }
+      .logo img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      /* JADWAL */
+      .jadwal-wrapper {
+        width: 82%;
+        margin: 0 auto 0;
+        background: white;
+        border-radius: 20px;
+        padding: 28px 35px;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+        position: relative;
+        z-index: 5;
+      }
+      .jadwal-title {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+        margin-bottom: 25px;
+      }
+      .jadwal-title i {
+        color: #2bb673;
+        font-size: 22px;
+      }
+      .jadwal-title h2 {
+        font-size: 22px;
+        color: #111827;
+      }
+      .jadwal-content {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 20px;
+      }
+      .jadwal-item {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        flex: 1;
+      }
+      .jadwal-item i {
+        font-size: 30px;
+        color: #2bb673;
+      }
+      .jadwal-item span {
+        display: block;
+        font-size: 13px;
+        color: #6b7280;
+        margin-bottom: 3px;
+      }
+      .jadwal-item h3 {
+        font-size: 16px;
+        color: #111827;
+        font-weight: 600;
+        line-height: 1.4;
+      }
+      .line {
+        width: 1px;
+        height: 50px;
+        background: #d1d5db;
+      }
+      .kosong {
+        text-align: center;
+        color: red;
+      }
+
+      /* MENU */
+      .menu {
+        display: flex;
+        justify-content: center;
+        gap: 25px;
+        margin-top: 15px;
+        flex-wrap: wrap;
+      }
+      .card {
+        width: 300px;
+        background: white;
+        border-radius: 20px;
+        padding: 35px 25px;
+        text-align: center;
+        text-decoration: none;
+        color: #111827;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.07);
+        transition: 0.3s;
+        cursor: pointer;
+        display: block;
+      }
+      .card:hover {
+        transform: translateY(-5px);
+      }
+      .pasien {
+        border-top: 4px solid #2bb673;
+      }
+      .admin {
+        border-top: 4px solid #2d8cff;
+      }
+
+      .icon-box {
+        width: 80px;
+        height: 80px;
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: auto;
+        margin-bottom: 20px;
+      }
+      .green {
+        background: #e9f8f0;
+      }
+      .blue {
+        background: #eaf2ff;
+      }
+      .icon-box i {
+        font-size: 35px;
+      }
+      .green i {
+        color: #2bb673;
+      }
+      .blue i {
+        color: #2d8cff;
+      }
+
+      .card h2 {
+        font-size: 28px;
+        margin-bottom: 12px;
+      }
+      .card p {
+        font-size: 14px;
+        color: #6b7280;
+        line-height: 1.5;
+        margin-bottom: 25px;
+      }
+
+      /* BUTTON */
+      .btn {
+        display: inline-block;
+        padding: 12px 24px;
+        border-radius: 10px;
+        background: linear-gradient(90deg, #2bb673, #25c06d);
+        color: white;
+        font-size: 14px;
+        font-weight: 600;
+        transition: 0.3s;
+        border: none;
+        cursor: pointer;
+        font-family: inherit;
+      }
+      .btn:hover {
+        transform: scale(1.03);
+      }
+      .btn-blue {
+        background: linear-gradient(90deg, #2d8cff, #2563eb);
+      }
+      .btn i {
+        margin-right: 6px;
+      }
+
+      .footer {
+        text-align: center;
+        margin-top: 35px;
+        color: #6b7280;
+        font-size: 14px;
+      }
+
+      /* FORM */
+      .form-box,
+      .login-box {
+        background: white;
+        max-width: 600px;
+        margin: 40px auto;
+        padding: 30px;
+        border-radius: 16px;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+      }
+      .form-box h2,
+      .login-box h2 {
+        text-align: center;
+        margin-bottom: 25px;
+        color: #111827;
+      }
+      .form-box label {
+        display: block;
+        margin-top: 12px;
+        margin-bottom: 5px;
+        font-size: 14px;
+        color: #374151;
+        font-weight: 500;
+      }
+      .form-box input,
+      .form-box select,
+      .form-box textarea {
+        width: 100%;
+        padding: 10px 12px;
+        border: 1px solid #d1d5db;
+        border-radius: 8px;
+        font-size: 14px;
+        font-family: inherit;
+      }
+      .form-box textarea {
+        resize: vertical;
+        min-height: 70px;
+      }
+      .form-box .btn {
+        margin-top: 20px;
+        width: 100%;
+      }
+
+      /* LOGIN */
+      .login-wrapper {
+        min-height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: linear-gradient(135deg, #2bb673, #2d8cff);
+      }
+      .login-box {
+        margin: 0;
+      }
+      .input-group {
+        margin-bottom: 15px;
+      }
+      .input-group input {
+        width: 100%;
+        padding: 12px 14px;
+        border: 1px solid #d1d5db;
+        border-radius: 8px;
+        font-size: 14px;
+        font-family: inherit;
+      }
+      .login-box .btn {
+        width: 100%;
+      }
+
+      /* SUKSES */
+      .sukses-body {
+        background: linear-gradient(135deg, #2bb673, #2d8cff);
+        min-height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      .sukses-card {
+        background: white;
+        padding: 50px 60px;
+        border-radius: 20px;
+        text-align: center;
+        box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+      }
+      .sukses-icon {
+        font-size: 60px;
+        margin-bottom: 20px;
+      }
+      .sukses-card h2 {
+        color: #111827;
+        margin-bottom: 25px;
+      }
+      .sukses-btn {
+        display: inline-block;
+        padding: 12px 28px;
+        background: linear-gradient(90deg, #2bb673, #25c06d);
+        color: white;
+        border-radius: 10px;
+        text-decoration: none;
+        font-weight: 600;
+        transition: 0.3s;
+        cursor: pointer;
+        border: none;
+        font-family: inherit;
+        font-size: 14px;
+      }
+      .sukses-btn:hover {
+        transform: scale(1.03);
+      }
+
+      /* DASHBOARD */
+      .layout {
+        display: flex;
+        min-height: 100vh;
+      }
+      .sidebar {
+        width: 240px;
+        background: linear-gradient(180deg, #1e293b, #0f172a);
+        color: white;
+        padding: 25px 15px;
+        transition: 0.3s;
+      }
+      .sidebar.hide {
+        width: 0;
+        padding: 25px 0;
+        overflow: hidden;
+      }
+      .sidebar .logo {
+        background: transparent;
+        color: white;
+        font-size: 22px;
+        font-weight: 700;
+        text-align: center;
+        margin-bottom: 30px;
+        width: auto;
+        height: auto;
+      }
+      .sidebar a {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        color: #cbd5e1;
+        padding: 12px 15px;
+        border-radius: 10px;
+        text-decoration: none;
+        margin-bottom: 6px;
+        font-size: 14px;
+        transition: 0.2s;
+        cursor: pointer;
+      }
+      .sidebar a:hover {
+        background: rgba(255, 255, 255, 0.08);
+        color: white;
+      }
+      .main {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+      }
+      .topbar {
+        background: white;
+        padding: 15px 25px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+      }
+      .menu-icon {
+        cursor: pointer;
+        font-size: 20px;
+        color: #374151;
+      }
+      .user-area {
+        position: relative;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        cursor: pointer;
+        color: #374151;
+        font-size: 14px;
+      }
+      .dropdown-menu {
+        display: none;
+        position: absolute;
+        top: 100%;
+        right: 0;
+        background: white;
+        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+        border-radius: 8px;
+        margin-top: 8px;
+        min-width: 140px;
+        overflow: hidden;
+        z-index: 99;
+      }
+      .dropdown-menu a {
+        display: block;
+        padding: 10px 15px;
+        color: #374151;
+        text-decoration: none;
+        font-size: 13px;
+        cursor: pointer;
+      }
+      .dropdown-menu a:hover {
+        background: #f3f4f6;
+      }
+      .content {
+        padding: 25px 30px;
+      }
+
+      /* ============================================================
+         DASHBOARD - TAMPILAN
+         ============================================================ */
+      .dashboard-header-new {
+        text-align: center;
+        padding: 5px 20px 20px;
+      }
+      .dashboard-header-new h2 {
+        font-size: 20px;
+        color: #111827;
+        font-weight: 700;
+        margin-bottom: 5px;
+        border: none !important;
+        padding: 0 !important;
+      }
+      .dashboard-header-new p {
+        font-size: 12px;
+        color: #9ca3af;
+      }
+
+      .dashboard-cards-new {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 18px;
+        margin-bottom: 22px;
+      }
+
+      .dashboard-card-new {
+        background: #ffffff;
+        border: 1px solid #e5e7eb;
+        border-radius: 10px;
+        padding: 22px 25px 25px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+      }
+      .dashboard-card-new h3 {
+        font-size: 13px;
+        color: #111827;
+        font-weight: 700;
+        margin-bottom: 14px;
+        text-align: center;
+      }
+      .dashboard-card-new h1 {
+        font-size: 26px;
+        color: #111827;
+        font-weight: 700;
+        text-align: center;
+      }
+
+      .chart-box-new {
+        background: #ffffff;
+        border: 1px solid #e5e7eb;
+        border-radius: 10px;
+        padding: 22px 25px;
+        height: 420px;
+        position: relative;
+      }
+      .chart-box-new h3 {
+        font-size: 14px;
+        color: #111827;
+        font-weight: 700;
+        margin-bottom: 18px;
+      }
+
+      #dashboardContent .dashboard-header-new h2 {
+        border-bottom: none;
+        padding-bottom: 0;
+        margin-bottom: 5px;
+      }
+
+      @media (max-width: 768px) {
+        .dashboard-cards-new {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      /* ============================================================
+         KELOLA JADWAL - TAMPILAN BARU SESUAI GAMBAR
+         ============================================================ */
+      .jadwal-page-title {
+        font-size: 18px;
+        font-weight: 700;
+        color: #111827;
+        margin-bottom: 20px;
+        border: none !important;
+        padding: 0 !important;
+      }
+
+      /* Card putih dengan border tipis */
+      .jadwal-panel {
+        background: #ffffff;
+        border: 1px solid #e5e7eb;
+        border-radius: 10px;
+        padding: 22px 25px;
+        margin-bottom: 18px;
+      }
+
+      .jadwal-panel h3 {
+        font-size: 14px;
+        font-weight: 700;
+        color: #111827;
+        margin-bottom: 18px;
+      }
+
+      /* Form tambah jadwal - satu baris horizontal */
+      .jadwal-form-row {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr auto;
+        gap: 15px;
+        align-items: end;
+      }
+
+      .jadwal-form-field {
+        display: flex;
+        flex-direction: column;
+      }
+
+      .jadwal-form-field label {
+        font-size: 12px;
+        color: #374151;
+        font-weight: 500;
+        margin-bottom: 6px;
+      }
+
+      .jadwal-form-field input {
+        padding: 9px 12px;
+        border: 1px solid #d1d5db;
+        border-radius: 6px;
+        font-size: 13px;
+        font-family: inherit;
+        background: #ffffff;
+        color: #111827;
+        transition: all 0.2s ease;
+      }
+
+      .jadwal-form-field input:focus {
+        outline: none;
+        border-color: #2bb673;
+        box-shadow: 0 0 0 3px rgba(43, 182, 115, 0.1);
+      }
+
+      /* Tombol Simpan hijau kecil */
+      .jadwal-btn-simpan {
+        padding: 9px 30px;
+        background: linear-gradient(90deg, #2bb673, #25c06d);
+        color: white;
+        border: none;
+        border-radius: 6px;
+        font-weight: 600;
+        font-size: 13px;
+        cursor: pointer;
+        font-family: inherit;
+        height: 38px;
+        transition: 0.2s;
+      }
+      .jadwal-btn-simpan:hover {
+        transform: translateY(-1px);
+        box-shadow: 0 4px 10px rgba(43, 182, 115, 0.3);
+      }
+
+      /* Tabel daftar jadwal */
+      .jadwal-table-new {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 13px;
+      }
+      .jadwal-table-new th,
+      .jadwal-table-new td {
+        padding: 14px 12px;
+        text-align: left;
+        border-bottom: 1px solid #f3f4f6;
+      }
+      .jadwal-table-new th {
+        background: transparent;
+        color: #111827;
+        font-weight: 700;
+        font-size: 12px;
+        padding-bottom: 16px;
+        border-bottom: 1px solid #e5e7eb;
+      }
+      .jadwal-table-new td {
+        color: #374151;
+        font-size: 12.5px;
+      }
+      .jadwal-table-new tr:last-child td {
+        border-bottom: none;
+      }
+      .jadwal-table-new tr:hover td {
+        background: #fafbfc;
+      }
+
+      /* Tombol aksi Edit & Hapus */
+      .aksi-btn-new {
+        display: flex;
+        gap: 6px;
+      }
+      .btn-edit-new {
+        padding: 5px 16px;
+        background: #3b82f6;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        font-size: 11px;
+        font-weight: 600;
+        cursor: pointer;
+        font-family: inherit;
+        transition: 0.2s;
+      }
+      .btn-edit-new:hover {
+        background: #2563eb;
+      }
+      .btn-hapus-new {
+        padding: 5px 16px;
+        background: #ef4444;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        font-size: 11px;
+        font-weight: 600;
+        cursor: pointer;
+        font-family: inherit;
+        transition: 0.2s;
+      }
+      .btn-hapus-new:hover {
+        background: #dc2626;
+      }
+
+      @media (max-width: 768px) {
+        .jadwal-form-row {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      /* TABLE (untuk Data Pasien, dll) */
+      .search-box {
+        margin: 20px 0;
+      }
+      .search-box form {
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+      }
+      .search-input {
+        flex: 1;
+        min-width: 220px;
+        padding: 10px 15px;
+        border: 1px solid #d1d5db;
+        border-radius: 8px;
+        font-size: 14px;
+        font-family: inherit;
+      }
+      .search-btn {
+        padding: 10px 22px;
+        background: linear-gradient(90deg, #2bb673, #25c06d);
+        color: white;
+        border: none;
+        border-radius: 8px;
+        font-weight: 600;
+        cursor: pointer;
+        font-family: inherit;
+      }
+      .jadwal-card {
+        background: white;
+        border-radius: 16px;
+        padding: 25px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+        margin-bottom: 25px;
+      }
+      .jadwal-card h3 {
+        color: #111827;
+        margin-bottom: 20px;
+        font-size: 18px;
+      }
+      .jadwal-table-wrap {
+        overflow-x: auto;
+      }
+      .jadwal-table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 13px;
+      }
+      .jadwal-table th,
+      .jadwal-table td {
+        padding: 10px 12px;
+        text-align: left;
+        border-bottom: 1px solid #e5e7eb;
+      }
+      .jadwal-table th {
+        background: #f9fafb;
+        color: #374151;
+        font-weight: 600;
+        font-size: 12px;
+        text-transform: uppercase;
+      }
+      .jadwal-table tr:hover {
+        background: #f9fafb;
+      }
+      .status-sudah {
+        background: #d1fae5;
+        color: #065f46;
+        padding: 4px 10px;
+        border-radius: 12px;
+        font-size: 11px;
+        font-weight: 600;
+      }
+      .status-belum {
+        background: #fee2e2;
+        color: #991b1b;
+        padding: 4px 10px;
+        border-radius: 12px;
+        font-size: 11px;
+        font-weight: 600;
+      }
+      .aksi-btn {
+        display: flex;
+        gap: 6px;
+      }
+      .jadwal-edit,
+      .jadwal-hapus {
+        padding: 5px 12px;
+        border-radius: 6px;
+        text-decoration: none;
+        font-size: 11px;
+        font-weight: 600;
+        transition: 0.2s;
+        cursor: pointer;
+        border: none;
+        font-family: inherit;
+      }
+      .jadwal-edit {
+        background: #dbeafe;
+        color: #1e40af;
+      }
+      .jadwal-edit:hover {
+        background: #bfdbfe;
+      }
+      .jadwal-hapus {
+        background: #fee2e2;
+        color: #991b1b;
+      }
+      .jadwal-hapus:hover {
+        background: #fecaca;
+      }
+
+      /* FORM JADWAL (untuk edit) */
+      .page-jadwal {
+        padding: 20px 0;
+      }
+      .jadwal-form .jadwal-group {
+        margin-bottom: 15px;
+      }
+      .jadwal-form label {
+        display: block;
+        margin-bottom: 6px;
+        font-size: 13px;
+        color: #374151;
+        font-weight: 500;
+      }
+      .jadwal-form input,
+      .jadwal-form select {
+        width: 100%;
+        padding: 10px 12px;
+        border: 1px solid #d1d5db;
+        border-radius: 8px;
+        font-size: 14px;
+        font-family: inherit;
+      }
+      .jadwal-btn {
+        padding: 10px 25px;
+        background: linear-gradient(90deg, #2bb673, #25c06d);
+        color: white;
+        border: none;
+        border-radius: 8px;
+        font-weight: 600;
+        cursor: pointer;
+        font-family: inherit;
+      }
+
+      /* LAPORAN */
+      .laporan-filter {
+        display: flex;
+        gap: 10px;
+        margin-bottom: 20px;
+        flex-wrap: wrap;
+        align-items: center;
+      }
+      .laporan-filter select {
+        padding: 8px 12px;
+        border: 1px solid #d1d5db;
+        border-radius: 8px;
+        font-size: 13px;
+        font-family: inherit;
+        background: #f9fafb;
+        color: #374151;
+        min-width: 150px;
+      }
+      .laporan-filter .btn-filter {
+        padding: 8px 20px;
+        background: #2d8cff;
+        color: white;
+        border: none;
+        border-radius: 8px;
+        font-weight: 600;
+        font-size: 13px;
+        cursor: pointer;
+        font-family: inherit;
+      }
+      .laporan-filter .btn-filter:hover {
+        background: #2563eb;
+      }
+
+      .stat-cards {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 15px;
+        margin-bottom: 25px;
+      }
+      .stat-card {
+        padding: 25px 20px;
+        border-radius: 12px;
+        color: white;
+        text-align: center;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+      }
+      .stat-card.blue {
+        background: linear-gradient(135deg, #3b82f6, #2563eb);
+      }
+      .stat-card.green {
+        background: linear-gradient(135deg, #22c55e, #16a34a);
+      }
+      .stat-card.purple {
+        background: linear-gradient(135deg, #8b5cf6, #7c3aed);
+      }
+      .stat-card h3 {
+        font-size: 14px;
+        font-weight: 500;
+        margin-bottom: 10px;
+        opacity: 0.9;
+      }
+      .stat-card h1 {
+        font-size: 32px;
+        font-weight: 700;
+        margin: 0;
+      }
+
+      .laporan-table-wrap {
+        overflow-x: auto;
+        background: white;
+        border-radius: 12px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+      }
+      .laporan-table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 13px;
+      }
+      .laporan-table th,
+      .laporan-table td {
+        padding: 12px 15px;
+        text-align: left;
+        border-bottom: 1px solid #e5e7eb;
+      }
+      .laporan-table th {
+        background: #f9fafb;
+        color: #374151;
+        font-weight: 600;
+        font-size: 12px;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+      }
+      .laporan-table tr:hover {
+        background: #f9fafb;
+      }
+
+      .laporan-footer {
+        margin-top: 20px;
+        display: flex;
+        justify-content: flex-end;
+      }
+      .btn-export.pdf {
+        background: linear-gradient(90deg, #dc2626, #b91c1c);
+        color: white;
+        padding: 10px 22px;
+        border-radius: 8px;
+        text-decoration: none;
+        font-weight: 600;
+        font-size: 14px;
+        cursor: pointer;
+        border: none;
+        font-family: inherit;
+        transition: 0.3s;
+      }
+      .btn-export.pdf:hover {
+        transform: scale(1.03);
+        box-shadow: 0 4px 12px rgba(220, 38, 38, 0.3);
+      }
+
+      @media (max-width: 768px) {
+        .stat-cards {
+          grid-template-columns: 1fr;
+        }
+        .laporan-filter {
+          flex-direction: column;
+        }
+        .laporan-filter select,
+        .laporan-filter .btn-filter {
+          width: 100%;
+        }
+      }
+
+      /* PRINT */
+      .print-page {
+        background: white;
+        padding: 30px;
+        font-family: "Times New Roman", serif;
+      }
+
+      /* FORM EDIT PASIEN */
+      .edit-form .jadwal-group {
+        margin-bottom: 18px;
+      }
+      .edit-form .jadwal-group label {
+        display: block;
+        margin-bottom: 6px;
+        font-size: 13px;
+        color: #374151;
+        font-weight: 600;
+        letter-spacing: 0.2px;
+      }
+      .edit-form .jadwal-group input,
+      .edit-form .jadwal-group select,
+      .edit-form .jadwal-group textarea {
+        width: 100%;
+        padding: 11px 14px;
+        border: 1px solid #d1d5db;
+        border-radius: 10px;
+        font-size: 14px;
+        font-family: inherit;
+        background: #f9fafb;
+        transition: all 0.2s ease;
+        color: #111827;
+      }
+      .edit-form .jadwal-group input:focus,
+      .edit-form .jadwal-group select:focus,
+      .edit-form .jadwal-group textarea:focus {
+        outline: none;
+        border-color: #2bb673;
+        background: #ffffff;
+        box-shadow: 0 0 0 4px rgba(43, 182, 115, 0.12);
+      }
+
+      #dashboardContent .jadwal-card {
+        padding: 30px 32px;
+      }
+      #dashboardContent h2 {
+        font-size: 22px;
+        font-weight: 700;
+        color: #111827;
+        margin-bottom: 20px;
+        padding-bottom: 15px;
+        border-bottom: 2px solid #f3f4f6;
+      }
+
+      .edit-form .jadwal-btn,
+      .edit-form .btn-export.gray {
+        padding: 11px 26px;
+        font-size: 14px;
+        font-weight: 600;
+        border-radius: 10px;
+        transition: all 0.25s ease;
+        margin-right: 8px;
+        margin-top: 10px;
+      }
+      .edit-form .jadwal-btn {
+        background: linear-gradient(90deg, #2bb673, #25c06d);
+        box-shadow: 0 4px 12px rgba(43, 182, 115, 0.25);
+        color: white;
+        border: none;
+        cursor: pointer;
+        font-family: inherit;
+      }
+      .edit-form .jadwal-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 18px rgba(43, 182, 115, 0.35);
+      }
+      .edit-form .btn-export.gray {
+        background: linear-gradient(90deg, #9ca3af, #6b7280);
+        box-shadow: 0 4px 12px rgba(107, 114, 128, 0.2);
+      }
+      .edit-form .btn-export.gray:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 18px rgba(107, 114, 128, 0.3);
+      }
+
+      @media (min-width: 768px) {
+        .edit-form {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          gap: 0 24px;
+        }
+        .edit-form .jadwal-group:nth-last-child(-n + 2) {
+          grid-column: 1 / -1;
+        }
+        .edit-form > br {
+          display: none;
+        }
+      }
+
+      /* FORM TAMBAH JADWAL (EDIT) */
+      .jadwal-form .jadwal-group {
+        margin-bottom: 18px;
+      }
+      .jadwal-form .jadwal-group label {
+        display: block;
+        margin-bottom: 6px;
+        font-size: 13px;
+        color: #374151;
+        font-weight: 600;
+      }
+      .jadwal-form .jadwal-group input,
+      .jadwal-form .jadwal-group select,
+      .jadwal-form .jadwal-group textarea {
+        width: 100%;
+        padding: 11px 14px;
+        border: 1px solid #d1d5db;
+        border-radius: 10px;
+        font-size: 14px;
+        font-family: inherit;
+        background: #f9fafb;
+        transition: all 0.2s ease;
+      }
+      .jadwal-form .jadwal-group input:focus,
+      .jadwal-form .jadwal-group select:focus,
+      .jadwal-form .jadwal-group textarea:focus {
+        outline: none;
+        border-color: #2bb673;
+        background: #ffffff;
+        box-shadow: 0 0 0 4px rgba(43, 182, 115, 0.12);
+      }
+      .jadwal-form .jadwal-btn {
+        padding: 11px 26px;
+        font-size: 14px;
+        font-weight: 600;
+        border-radius: 10px;
+        background: linear-gradient(90deg, #2bb673, #25c06d);
+        box-shadow: 0 4px 12px rgba(43, 182, 115, 0.25);
+        transition: all 0.25s ease;
+        margin-top: 10px;
+        color: white;
+        border: none;
+        cursor: pointer;
+        font-family: inherit;
+      }
+      .jadwal-form .jadwal-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 18px rgba(43, 182, 115, 0.35);
+      }
+      .jadwal-form .btn-export.gray {
+        padding: 11px 26px;
+        font-size: 14px;
+        font-weight: 600;
+        border-radius: 10px;
+        background: linear-gradient(90deg, #9ca3af, #6b7280);
+        box-shadow: 0 4px 12px rgba(107, 114, 128, 0.2);
+        transition: all 0.25s ease;
+        margin-top: 10px;
+        margin-left: 8px;
+        color: white;
+        border: none;
+        cursor: pointer;
+        font-family: inherit;
+      }
+      .jadwal-form .btn-export.gray:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 18px rgba(107, 114, 128, 0.3);
+      }
+
+      #dashboardContent .jadwal-card {
+        padding: 30px 32px;
+        border-radius: 18px;
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.06);
+        animation: fadeInUp 0.3s ease;
+      }
+
+      @keyframes fadeInUp {
+        from {
+          opacity: 0;
+          transform: translateY(10px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      /* RESPONSIVE */
+      @media (max-width: 992px) {
+        .jadwal-content {
+          flex-direction: column;
+        }
+        .line {
+          display: none;
+        }
+        .jadwal-item {
+          flex-direction: column;
+          text-align: center;
+        }
+        .jadwal-wrapper {
+          width: 100%;
+        }
+        .sidebar {
+          position: fixed;
+          left: 0;
+          top: 0;
+          height: 100vh;
+          z-index: 100;
+        }
+        .sidebar.hide {
+          transform: translateX(-100%);
+          width: 240px;
+          padding: 25px 15px;
+        }
+      }
+      @media (max-width: 767px) {
+        .edit-form,
+        .jadwal-form {
+          display: block;
+        }
+        .edit-form .jadwal-group,
+        .jadwal-form .jadwal-group {
+          margin-bottom: 15px;
+        }
+        #dashboardContent .jadwal-card {
+          padding: 20px 18px;
+        }
+        #dashboardContent h2 {
+          font-size: 18px;
+        }
+      }
+      @media (max-width: 576px) {
+        .header {
+          padding: 40px 20px 80px;
+        }
+        .header h1 {
+          font-size: 24px;
+        }
+        .header p {
+          font-size: 14px;
+        }
+        .jadwal-title h2 {
+          font-size: 18px;
+        }
+        .card {
+          width: 100%;
+        }
+        .content {
+          padding: 15px;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- HALAMAN 1 : INDEX -->
+    <div id="page-index" class="page active">
+      <div class="container">
+        <div class="header">
+          <div class="header-content">
+            <h1>Pendataan Layanan Kesehatan Gratis</h1>
+            <p>Djalaluddin Pane Foundation</p>
+          </div>
+        </div>
+
+        <div class="jadwal-wrapper">
+          <div class="jadwal-title">
+            <i class="fa-solid fa-calendar-check"></i>
+            <h2>Jadwal Layanan Kesehatan</h2>
+          </div>
+          <div class="jadwal-content" id="jadwalTerbaru"></div>
+        </div>
+
+        <div class="menu">
+          <a onclick="showPage('page-form')" class="card pasien">
+            <div class="icon-box green">
+              <i class="fa-solid fa-users"></i>
+            </div>
+            <h2>Pasien</h2>
+            <p>Isi data peserta layanan kesehatan</p>
+            <div class="btn">
+              <i class="fa-solid fa-clipboard"></i>
+              Isi Data
+            </div>
+          </a>
+
+          <a onclick="showPage('page-login')" class="card admin">
+            <div class="icon-box blue">
+              <i class="fa-solid fa-user-shield"></i>
+            </div>
+            <h2>Admin</h2>
+            <p>Login untuk mengelola data pasien</p>
+            <div class="btn btn-blue">
+              <i class="fa-solid fa-lock"></i>
+              Login Admin
+            </div>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- HALAMAN 2 : FORM -->
+    <div id="page-form" class="page">
+      <div class="container">
+        <div class="form-box">
+          <h2>Form Data Pasien</h2>
+
+          <form
+            onsubmit="
+              event.preventDefault();
+              simpanPasien();
+            "
+          >
+            <label>Jadwal Layanan</label>
+            <select id="f_id_jadwal" required></select>
+
+            <label>NIK</label>
+            <input type="text" id="f_nik" required />
+
+            <label>Nama</label>
+            <input type="text" id="f_nama" required />
+
+            <label>Tanggal Lahir</label>
+            <input type="date" id="f_tanggal_lahir" required />
+
+            <label>Jenis Kelamin</label>
+            <select id="f_jenis_kelamin">
+              <option>Laki-laki</option>
+              <option>Perempuan</option>
+            </select>
+
+            <label>Agama</label>
+            <input type="text" id="f_agama" />
+
+            <label>Alamat</label>
+            <textarea id="f_alamat"></textarea>
+
+            <label>Desa/Kelurahan</label>
+            <input type="text" id="f_desa_kelurahan" />
+
+            <label>Kecamatan</label>
+            <input type="text" id="f_kecamatan" />
+
+            <label>Kabupaten/Kota</label>
+            <input type="text" id="f_kabupaten_kota" />
+
+            <label>Diinput Oleh</label>
+            <select id="f_diinput_oleh" required>
+              <option value="">-- Pilih --</option>
+              <option value="Diri Sendiri">Diri Sendiri</option>
+              <option value="Keluarga">Keluarga</option>
+              <option value="Petugas">Petugas</option>
+            </select>
+
+            <label>Nama Penginput</label>
+            <input
+              type="text"
+              id="f_nama_penginput"
+              placeholder="Masukkan nama penginput"
+            />
+
+            <button type="submit" class="btn">Simpan Data</button>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <!-- HALAMAN 3 : LOGIN -->
+    <div id="page-login" class="page">
+      <div class="login-wrapper">
+        <div class="login-box">
+          <h2>Djalaluddin Pane Foundation</h2>
+
+          <form
+            onsubmit="
+              event.preventDefault();
+              loginAdmin();
+            "
+          >
+            <div class="input-group">
+              <input
+                type="text"
+                id="login_user"
+                placeholder="Username"
+                required
+              />
+            </div>
+            <div class="input-group">
+              <input
+                type="password"
+                id="login_pass"
+                placeholder="Password"
+                required
+              />
+            </div>
+            <button class="btn" name="login">Login</button>
+          </form>
+          <p
+            style="
+              text-align: center;
+              font-size: 12px;
+              color: #6b7280;
+              margin-top: 15px;
+            "
+          ></p>
+        </div>
+      </div>
+    </div>
+
+    <!-- HALAMAN 4 : SUKSES -->
+    <div id="page-sukses" class="page">
+      <div class="sukses-body">
+        <div class="sukses-card">
+          <div class="sukses-icon">🎉</div>
+          <h2>Data berhasil disimpan</h2>
+          <button onclick="showPage('page-index')" class="sukses-btn">
+            Kembali ke Beranda
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- HALAMAN 5 : DASHBOARD -->
+    <div id="page-dashboard" class="page">
+      <div class="layout">
+        <div class="sidebar" id="sidebar">
+          <div class="logo">DPF</div>
+          <a onclick="bukaHalaman('dashboard')"
+            ><i class="fas fa-home"></i> <span>Dashboard</span></a
+          >
+          <a onclick="bukaHalaman('pasien')"
+            ><i class="fas fa-user"></i> <span>Data Pasien</span></a
+          >
+          <a onclick="bukaHalaman('jadwal')"
+            ><i class="fas fa-calendar"></i> <span>Jadwal Layanan</span></a
+          >
+          <a onclick="bukaHalaman('laporan')"
+            ><i class="fas fa-file"></i> <span>Laporan</span></a
+          >
+          <a onclick="showPage('page-index')"
+            ><i class="fas fa-sign-out-alt"></i> <span>Logout</span></a
+          >
+        </div>
+
+        <div class="main">
+          <div class="topbar">
+            <div class="menu-icon" onclick="toggleSidebar()">
+              <i class="fas fa-bars"></i>
+            </div>
+
+            <div class="user-area" onclick="toggleDropdown(event)">
+              <i class="fas fa-user-circle"></i>
+              <span>Admin</span>
+              <i class="fas fa-caret-down"></i>
+
+              <div class="dropdown-menu" id="dropdown">
+                <a onclick="showPage('page-login')">Logout</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="content" id="dashboardContent"></div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      /* ============================================================
+         PENYIMPANAN DATA (localStorage)
+         ============================================================ */
+      const K_PASIEN = "dpf_pasien";
+      const K_JADWAL = "dpf_jadwal";
+
+      function loadPasien() {
+        try {
+          return JSON.parse(localStorage.getItem(K_PASIEN)) || [];
+        } catch (e) {
+          return [];
+        }
+      }
+      function savePasien(d) {
+        localStorage.setItem(K_PASIEN, JSON.stringify(d));
+      }
+
+      function loadJadwal() {
+        try {
+          let d = JSON.parse(localStorage.getItem(K_JADWAL));
+          if (!d || d.length === 0) {
+            d = [
+              {
+                id_jadwal: 1,
+                tanggal: "2026-01-01",
+                lokasi: "Medan",
+                kegiatan: "Layanan Kesehatan Gratis",
+              },
+            ];
+            localStorage.setItem(K_JADWAL, JSON.stringify(d));
+          }
+          return d;
+        } catch (e) {
+          return [];
+        }
+      }
+      function saveJadwal(d) {
+        localStorage.setItem(K_JADWAL, JSON.stringify(d));
+      }
+
+      function newId(arr, key) {
+        if (!arr.length) return 1;
+        return Math.max(...arr.map((x) => parseInt(x[key]) || 0)) + 1;
+      }
+
+      /* ============================================================
+         NAVIGASI
+         ============================================================ */
+      function showPage(id) {
+        document.querySelectorAll(".page").forEach(function (p) {
+          p.classList.remove("active");
+        });
+        var t = document.getElementById(id);
+        if (t) {
+          t.classList.add("active");
+          window.scrollTo(0, 0);
+        }
+
+        if (id === "page-index") renderJadwalIndex();
+        if (id === "page-form") renderDropdownJadwal();
+      }
+
+      function bukaHalaman(nama) {
+        document.querySelectorAll(".page").forEach(function (p) {
+          p.classList.remove("active");
+        });
+        document.getElementById("page-dashboard").classList.add("active");
+        window.scrollTo(0, 0);
+
+        if (nama === "dashboard") renderDashboard();
+        else if (nama === "pasien") renderDataPasien();
+        else if (nama === "jadwal") renderKelolaJadwal();
+        else if (nama === "laporan") renderLaporan();
+      }
+
+      function toggleSidebar() {
+        document.getElementById("sidebar").classList.toggle("hide");
+      }
+
+      function toggleDropdown(e) {
+        if (e) e.stopPropagation();
+        var dropdown = document.getElementById("dropdown");
+        dropdown.style.display =
+          dropdown.style.display === "block" ? "none" : "block";
+      }
+
+      window.addEventListener("click", function (e) {
+        if (!e.target.closest(".user-area")) {
+          var dd = document.getElementById("dropdown");
+          if (dd) dd.style.display = "none";
+        }
+      });
+
+      /* ============================================================
+         LOGIN
+         ============================================================ */
+      function loginAdmin() {
+        var u = document.getElementById("login_user").value.trim();
+        var p = document.getElementById("login_pass").value.trim();
+        if (u === "admin" && p === "admin123") {
+          bukaHalaman("dashboard");
+        } else {
+          alert("Username atau password salah!");
+        }
+      }
+
+      /* ============================================================
+         SIMPAN PASIEN
+         ============================================================ */
+      function simpanPasien() {
+        var data = loadPasien();
+        data.push({
+          id: newId(data, "id"),
+          id_jadwal: document.getElementById("f_id_jadwal").value,
+          nik: document.getElementById("f_nik").value,
+          nama: document.getElementById("f_nama").value,
+          tanggal_lahir: document.getElementById("f_tanggal_lahir").value,
+          jenis_kelamin: document.getElementById("f_jenis_kelamin").value,
+          agama: document.getElementById("f_agama").value,
+          alamat: document.getElementById("f_alamat").value,
+          desa_kelurahan: document.getElementById("f_desa_kelurahan").value,
+          kecamatan: document.getElementById("f_kecamatan").value,
+          kabupaten_kota: document.getElementById("f_kabupaten_kota").value,
+          status_pemeriksaan: "Belum Diperiksa",
+          diinput_oleh: document.getElementById("f_diinput_oleh").value,
+          nama_penginput: document.getElementById("f_nama_penginput").value,
+        });
+        savePasien(data);
+        document
+          .querySelectorAll(
+            "#page-form input, #page-form select, #page-form textarea",
+          )
+          .forEach(function (el) {
+            el.value = "";
+          });
+        showPage("page-sukses");
+      }
+
+      /* ============================================================
+         RENDER JADWAL DI HALAMAN DEPAN
+         ============================================================ */
+      function renderJadwalIndex() {
+        var jadwal = loadJadwal();
+        var box = document.getElementById("jadwalTerbaru");
+        if (!box) return;
+        if (!jadwal.length) {
+          box.innerHTML = '<p class="kosong">Jadwal belum tersedia</p>';
+          return;
+        }
+        jadwal.sort(function (a, b) {
+          return new Date(b.tanggal) - new Date(a.tanggal);
+        });
+        var j = jadwal[0];
+        box.innerHTML =
+          '<div class="jadwal-item">' +
+          '<i class="fa-solid fa-calendar-days"></i>' +
+          "<div><span>Tanggal</span><h3>" +
+          formatTanggal(j.tanggal) +
+          "</h3></div>" +
+          "</div>" +
+          '<div class="line"></div>' +
+          '<div class="jadwal-item">' +
+          '<i class="fa-solid fa-location-dot"></i>' +
+          "<div><span>Lokasi</span><h3>" +
+          j.lokasi +
+          "</h3></div>" +
+          "</div>" +
+          '<div class="line"></div>' +
+          '<div class="jadwal-item">' +
+          '<i class="fa-solid fa-notes-medical"></i>' +
+          "<div><span>Kegiatan</span><h3>" +
+          (j.kegiatan || "-") +
+          "</h3></div>" +
+          "</div>";
+      }
+
+      /* ============================================================
+         DROPDOWN JADWAL DI FORM
+         ============================================================ */
+      function renderDropdownJadwal() {
+        var jadwal = loadJadwal();
+        var sel = document.getElementById("f_id_jadwal");
+        if (!sel) return;
+        sel.innerHTML = '<option value="">-- Pilih Jadwal --</option>';
+        jadwal.forEach(function (j) {
+          sel.innerHTML +=
+            '<option value="' +
+            j.id_jadwal +
+            '">' +
+            formatTanggal(j.tanggal) +
+            " - " +
+            j.lokasi +
+            "</option>";
+        });
+      }
+
+      /* ============================================================
+         RENDER DASHBOARD
+         ============================================================ */
+      function renderDashboard() {
+        var pasien = loadPasien();
+        var jadwal = loadJadwal();
+        var laki = pasien.filter(function (p) {
+          return p.jenis_kelamin === "Laki-laki";
+        }).length;
+        var perempuan = pasien.filter(function (p) {
+          return p.jenis_kelamin === "Perempuan";
+        }).length;
+
+        document.getElementById("dashboardContent").innerHTML =
+          '<div class="dashboard-header-new">' +
+          "<h2>Selamat Datang, Admin</h2>" +
+          "<p>Aplikasi Pendataan Layanan Kesehatan Gratis Berbasis Web</p>" +
+          "</div>" +
+          '<div class="dashboard-cards-new">' +
+          '<div class="dashboard-card-new">' +
+          "<h3>Total Pasien</h3>" +
+          "<h1>" +
+          pasien.length +
+          "</h1>" +
+          "</div>" +
+          '<div class="dashboard-card-new">' +
+          "<h3>Total Jadwal</h3>" +
+          "<h1>" +
+          jadwal.length +
+          "</h1>" +
+          "</div>" +
+          "</div>" +
+          '<div class="chart-box-new">' +
+          "<h3>Grafik Pasien</h3>" +
+          '<canvas id="myChart"></canvas>' +
+          "</div>";
+
+        if (window._chart) window._chart.destroy();
+        var ctx = document.getElementById("myChart");
+        if (ctx) {
+          window._chart = new Chart(ctx, {
+            type: "bar",
+            data: {
+              labels: ["Laki-laki", "Perempuan"],
+              datasets: [
+                {
+                  label: "Jumlah Pasien",
+                  data: [laki, perempuan],
+                  backgroundColor: "#93c5fd",
+                  borderColor: "#93c5fd",
+                  borderWidth: 0,
+                  barThickness: 100,
+                  borderRadius: 0,
+                },
+              ],
+            },
+            options: {
+              responsive: true,
+              maintainAspectRatio: false,
+              plugins: {
+                legend: {
+                  position: "top",
+                  align: "end",
+                  labels: {
+                    boxWidth: 14,
+                    boxHeight: 14,
+                    font: { size: 11 },
+                    color: "#374151",
+                    padding: 10,
+                  },
+                },
+                tooltip: {
+                  backgroundColor: "rgba(0,0,0,0.75)",
+                  titleFont: { size: 12 },
+                  bodyFont: { size: 12 },
+                  padding: 10,
+                },
+              },
+              scales: {
+                y: {
+                  beginAtZero: true,
+                  ticks: {
+                    stepSize: 1,
+                    precision: 0,
+                    color: "#9ca3af",
+                    font: { size: 11 },
+                  },
+                  grid: {
+                    color: "#f3f4f6",
+                    drawBorder: false,
+                  },
+                  border: {
+                    display: false,
+                  },
+                },
+                x: {
+                  grid: {
+                    display: false,
+                  },
+                  ticks: {
+                    color: "#9ca3af",
+                    font: { size: 11 },
+                  },
+                  border: {
+                    display: false,
+                  },
+                },
+              },
+            },
+          });
+        }
+      }
+
+      /* ============================================================
+         RENDER DATA PASIEN
+         ============================================================ */
+      function renderDataPasien() {
+        var pasien = loadPasien();
+        var rows = "";
+        if (!pasien.length) {
+          rows =
+            '<tr><td colspan="13" style="text-align:center;">Belum ada data pasien</td></tr>';
+        } else {
+          pasien
+            .slice()
+            .reverse()
+            .forEach(function (p, i) {
+              rows +=
+                "<tr>" +
+                "<td>" +
+                (i + 1) +
+                "</td>" +
+                "<td>" +
+                p.nik +
+                "</td>" +
+                "<td>" +
+                p.nama +
+                "</td>" +
+                "<td>" +
+                formatTanggal(p.tanggal_lahir) +
+                "</td>" +
+                "<td>" +
+                p.jenis_kelamin +
+                "</td>" +
+                "<td>" +
+                (p.agama || "-") +
+                "</td>" +
+                "<td>" +
+                (p.kecamatan || "-") +
+                "</td>" +
+                "<td>" +
+                (p.desa_kelurahan || "-") +
+                "</td>" +
+                "<td>" +
+                (p.kabupaten_kota || "-") +
+                "</td>" +
+                "<td>" +
+                (p.status_pemeriksaan === "Sudah Diperiksa"
+                  ? '<span class="status-sudah">Sudah Diperiksa</span>'
+                  : '<span class="status-belum">Belum Diperiksa</span>') +
+                "</td>" +
+                "<td>" +
+                (p.diinput_oleh || "-") +
+                "</td>" +
+                "<td>" +
+                (p.nama_penginput || "-") +
+                "</td>" +
+                '<td class="aksi-btn">' +
+                '<button class="jadwal-edit" onclick="editPasien(' +
+                p.id +
+                ')">Edit</button>' +
+                '<button class="jadwal-hapus" onclick="hapusPasien(' +
+                p.id +
+                ')">Hapus</button>' +
+                "</td>" +
+                "</tr>";
+            });
+        }
+        document.getElementById("dashboardContent").innerHTML =
+          "<h2>Data Pasien</h2>" +
+          '<div class="search-box">' +
+          '<form onsubmit="event.preventDefault(); cariPasien();">' +
+          '<input type="text" id="searchPasien" placeholder="Cari Nama atau NIK..." class="search-input" />' +
+          '<button type="submit" class="search-btn">Cari</button>' +
+          "</form>" +
+          "</div>" +
+          '<div class="jadwal-card">' +
+          '<div class="jadwal-table-wrap">' +
+          '<table class="jadwal-table">' +
+          "<thead>" +
+          "<tr>" +
+          "<th>No Antrian</th><th>NIK</th><th>Nama</th><th>Tanggal Lahir</th>" +
+          "<th>Jenis Kelamin</th><th>Agama</th><th>Kecamatan</th>" +
+          "<th>Desa/Kelurahan</th><th>Kabupaten/Kota</th>" +
+          "<th>Status</th><th>Penginput</th><th>Nama Penginput</th><th>Aksi</th>" +
+          "</tr>" +
+          "</thead>" +
+          '<tbody id="tbodyPasien">' +
+          rows +
+          "</tbody>" +
+          "</table>" +
+          "</div>" +
+          "</div>";
+      }
+
+      function cariPasien() {
+        var k = document.getElementById("searchPasien").value.toLowerCase();
+        var pasien = loadPasien().filter(function (p) {
+          return (
+            (p.nama || "").toLowerCase().includes(k) ||
+            (p.nik || "").toLowerCase().includes(k)
+          );
+        });
+        var rows = "";
+        if (!pasien.length) {
+          rows =
+            '<tr><td colspan="13" style="text-align:center;">Data tidak ditemukan</td></tr>';
+        } else {
+          pasien.forEach(function (p, i) {
+            rows +=
+              "<tr>" +
+              "<td>" +
+              (i + 1) +
+              "</td>" +
+              "<td>" +
+              p.nik +
+              "</td>" +
+              "<td>" +
+              p.nama +
+              "</td>" +
+              "<td>" +
+              formatTanggal(p.tanggal_lahir) +
+              "</td>" +
+              "<td>" +
+              p.jenis_kelamin +
+              "</td>" +
+              "<td>" +
+              (p.agama || "-") +
+              "</td>" +
+              "<td>" +
+              (p.kecamatan || "-") +
+              "</td>" +
+              "<td>" +
+              (p.desa_kelurahan || "-") +
+              "</td>" +
+              "<td>" +
+              (p.kabupaten_kota || "-") +
+              "</td>" +
+              "<td>" +
+              (p.status_pemeriksaan === "Sudah Diperiksa"
+                ? '<span class="status-sudah">Sudah Diperiksa</span>'
+                : '<span class="status-belum">Belum Diperiksa</span>') +
+              "</td>" +
+              "<td>" +
+              (p.diinput_oleh || "-") +
+              "</td>" +
+              "<td>" +
+              (p.nama_penginput || "-") +
+              "</td>" +
+              '<td class="aksi-btn">' +
+              '<button class="jadwal-edit" onclick="editPasien(' +
+              p.id +
+              ')">Edit</button>' +
+              '<button class="jadwal-hapus" onclick="hapusPasien(' +
+              p.id +
+              ')">Hapus</button>' +
+              "</td>" +
+              "</tr>";
+          });
+        }
+        document.getElementById("tbodyPasien").innerHTML = rows;
+      }
+
+      function hapusPasien(id) {
+        if (!confirm("Yakin mau hapus data ini?")) return;
+        savePasien(
+          loadPasien().filter(function (p) {
+            return p.id != id;
+          }),
+        );
+        renderDataPasien();
+      }
+
+      function editPasien(id) {
+        var p = loadPasien().find(function (x) {
+          return x.id == id;
+        });
+        if (!p) return;
+        var jadwal = loadJadwal();
+        var opsi = "";
+        jadwal.forEach(function (j) {
+          opsi +=
+            '<option value="' +
+            j.id_jadwal +
+            '"' +
+            (j.id_jadwal == p.id_jadwal ? " selected" : "") +
+            ">" +
+            formatTanggal(j.tanggal) +
+            " - " +
+            j.lokasi +
+            "</option>";
+        });
+        document.getElementById("dashboardContent").innerHTML =
+          "<h2>Edit Data Pasien</h2>" +
+          '<div class="jadwal-card">' +
+          '<form onsubmit="event.preventDefault(); updatePasien(' +
+          p.id +
+          ');" class="edit-form">' +
+          '<div class="jadwal-group"><label>Jadwal</label><select id="e_id_jadwal">' +
+          opsi +
+          "</select></div>" +
+          '<div class="jadwal-group"><label>NIK</label><input type="text" id="e_nik" value="' +
+          p.nik +
+          '" required></div>' +
+          '<div class="jadwal-group"><label>Nama</label><input type="text" id="e_nama" value="' +
+          p.nama +
+          '" required></div>' +
+          '<div class="jadwal-group"><label>Tgl Lahir</label><input type="date" id="e_tanggal_lahir" value="' +
+          p.tanggal_lahir +
+          '" required></div>' +
+          '<div class="jadwal-group"><label>JK</label>' +
+          '<select id="e_jenis_kelamin">' +
+          '<option value="Laki-laki"' +
+          (p.jenis_kelamin === "Laki-laki" ? " selected" : "") +
+          ">Laki-laki</option>" +
+          '<option value="Perempuan"' +
+          (p.jenis_kelamin === "Perempuan" ? " selected" : "") +
+          ">Perempuan</option>" +
+          "</select>" +
+          "</div>" +
+          '<div class="jadwal-group"><label>Agama</label><input type="text" id="e_agama" value="' +
+          (p.agama || "") +
+          '"></div>' +
+          '<div class="jadwal-group"><label>Kecamatan</label><input type="text" id="e_kecamatan" value="' +
+          (p.kecamatan || "") +
+          '"></div>' +
+          '<div class="jadwal-group"><label>Desa/Kelurahan</label><input type="text" id="e_desa_kelurahan" value="' +
+          (p.desa_kelurahan || "") +
+          '"></div>' +
+          '<div class="jadwal-group"><label>Kabupaten/Kota</label><input type="text" id="e_kabupaten_kota" value="' +
+          (p.kabupaten_kota || "") +
+          '"></div>' +
+          '<div class="jadwal-group"><label>Status</label>' +
+          '<select id="e_status_pemeriksaan">' +
+          '<option value="Belum Diperiksa"' +
+          (p.status_pemeriksaan === "Belum Diperiksa" ? " selected" : "") +
+          ">Belum Diperiksa</option>" +
+          '<option value="Sudah Diperiksa"' +
+          (p.status_pemeriksaan === "Sudah Diperiksa" ? " selected" : "") +
+          ">Sudah Diperiksa</option>" +
+          "</select>" +
+          "</div>" +
+          '<div class="jadwal-group"><label>Diinput Oleh</label>' +
+          '<select id="e_diinput_oleh">' +
+          '<option value="Diri Sendiri"' +
+          (p.diinput_oleh === "Diri Sendiri" ? " selected" : "") +
+          ">Diri Sendiri</option>" +
+          '<option value="Keluarga"' +
+          (p.diinput_oleh === "Keluarga" ? " selected" : "") +
+          ">Keluarga</option>" +
+          '<option value="Petugas"' +
+          (p.diinput_oleh === "Petugas" ? " selected" : "") +
+          ">Petugas</option>" +
+          "</select>" +
+          "</div>" +
+          '<div class="jadwal-group"><label>Nama Penginput</label><input type="text" id="e_nama_penginput" value="' +
+          (p.nama_penginput || "") +
+          '"></div>' +
+          "<br>" +
+          '<button type="submit" class="jadwal-btn">Update</button> ' +
+          '<button type="button" class="btn-export gray" onclick="renderDataPasien()">Batal</button>' +
+          "</form>" +
+          "</div>";
+      }
+
+      function updatePasien(id) {
+        var data = loadPasien();
+        var i = data.findIndex(function (p) {
+          return p.id == id;
+        });
+        if (i < 0) return;
+        data[i].id_jadwal = document.getElementById("e_id_jadwal").value;
+        data[i].nik = document.getElementById("e_nik").value;
+        data[i].nama = document.getElementById("e_nama").value;
+        data[i].tanggal_lahir =
+          document.getElementById("e_tanggal_lahir").value;
+        data[i].jenis_kelamin =
+          document.getElementById("e_jenis_kelamin").value;
+        data[i].agama = document.getElementById("e_agama").value;
+        data[i].kecamatan = document.getElementById("e_kecamatan").value;
+        data[i].desa_kelurahan =
+          document.getElementById("e_desa_kelurahan").value;
+        data[i].kabupaten_kota =
+          document.getElementById("e_kabupaten_kota").value;
+        data[i].status_pemeriksaan = document.getElementById(
+          "e_status_pemeriksaan",
+        ).value;
+        data[i].diinput_oleh = document.getElementById("e_diinput_oleh").value;
+        data[i].nama_penginput =
+          document.getElementById("e_nama_penginput").value;
+        savePasien(data);
+        alert("Data berhasil diupdate");
+        renderDataPasien();
+      }
+
+      /* ============================================================
+         KELOLA JADWAL - TAMPILAN BARU SESUAI GAMBAR
+         ============================================================ */
+      function renderKelolaJadwal() {
+        var jadwal = loadJadwal();
+        var rows = "";
+        if (!jadwal.length) {
+          rows =
+            '<tr><td colspan="5" style="text-align:center; color:#9ca3af;">Belum ada jadwal</td></tr>';
+        } else {
+          jadwal.forEach(function (j, i) {
+            rows +=
+              "<tr>" +
+              "<td>" +
+              (i + 1) +
+              "</td>" +
+              "<td>" +
+              formatTanggal(j.tanggal) +
+              "</td>" +
+              "<td>" +
+              j.lokasi +
+              "</td>" +
+              "<td>" +
+              (j.kegiatan || "-") +
+              "</td>" +
+              '<td class="aksi-btn-new">' +
+              '<button class="btn-edit-new" onclick="editJadwal(' +
+              j.id_jadwal +
+              ')">Edit</button>' +
+              '<button class="btn-hapus-new" onclick="hapusJadwal(' +
+              j.id_jadwal +
+              ')">Hapus</button>' +
+              "</td>" +
+              "</tr>";
+          });
+        }
+        document.getElementById("dashboardContent").innerHTML =
+          '<div class="jadwal-page-title">Kelola Jadwal Layanan</div>' +
+          // Card Tambah Jadwal
+          '<div class="jadwal-panel">' +
+          "<h3>Tambah Jadwal Layanan</h3>" +
+          '<form onsubmit="event.preventDefault(); simpanJadwal();" class="jadwal-form-row">' +
+          '<div class="jadwal-form-field">' +
+          "<label>Tanggal</label>" +
+          '<input type="date" id="j_tanggal" required>' +
+          "</div>" +
+          '<div class="jadwal-form-field">' +
+          "<label>Lokasi</label>" +
+          '<input type="text" id="j_lokasi" required>' +
+          "</div>" +
+          '<div class="jadwal-form-field">' +
+          "<label>Kegiatan</label>" +
+          '<input type="text" id="j_kegiatan" required>' +
+          "</div>" +
+          '<div class="jadwal-form-field">' +
+          '<button type="submit" class="jadwal-btn-simpan">Simpan</button>' +
+          "</div>" +
+          "</form>" +
+          "</div>" +
+          // Card Daftar Jadwal
+          '<div class="jadwal-panel">' +
+          "<h3>Daftar Jadwal Layanan</h3>" +
+          '<div class="jadwal-table-wrap">' +
+          '<table class="jadwal-table-new">' +
+          "<thead>" +
+          "<tr>" +
+          "<th>No</th>" +
+          "<th>Tanggal</th>" +
+          "<th>Lokasi</th>" +
+          "<th>Kegiatan</th>" +
+          "<th>Aksi</th>" +
+          "</tr>" +
+          "</thead>" +
+          "<tbody>" +
+          rows +
+          "</tbody>" +
+          "</table>" +
+          "</div>" +
+          "</div>";
+      }
+
+      function simpanJadwal() {
+        var data = loadJadwal();
+        data.push({
+          id_jadwal: newId(data, "id_jadwal"),
+          tanggal: document.getElementById("j_tanggal").value,
+          lokasi: document.getElementById("j_lokasi").value,
+          kegiatan: document.getElementById("j_kegiatan").value,
+        });
+        saveJadwal(data);
+        alert("Jadwal berhasil ditambahkan");
+        renderKelolaJadwal();
+      }
+
+      function hapusJadwal(id) {
+        if (!confirm("Yakin mau hapus?")) return;
+        saveJadwal(
+          loadJadwal().filter(function (j) {
+            return j.id_jadwal != id;
+          }),
+        );
+        renderKelolaJadwal();
+      }
+
+      function editJadwal(id) {
+        var j = loadJadwal().find(function (x) {
+          return x.id_jadwal == id;
+        });
+        if (!j) return;
+        document.getElementById("dashboardContent").innerHTML =
+          '<div class="jadwal-page-title">Edit Jadwal Layanan</div>' +
+          '<div class="jadwal-panel">' +
+          '<form onsubmit="event.preventDefault(); updateJadwal(' +
+          j.id_jadwal +
+          ');" class="jadwal-form">' +
+          '<div class="jadwal-group"><label>Tanggal</label><input type="date" id="ej_tanggal" value="' +
+          j.tanggal +
+          '" required></div>' +
+          '<div class="jadwal-group"><label>Lokasi</label><input type="text" id="ej_lokasi" value="' +
+          j.lokasi +
+          '" required></div>' +
+          '<div class="jadwal-group"><label>Kegiatan</label><input type="text" id="ej_kegiatan" value="' +
+          (j.kegiatan || "") +
+          '" required></div>' +
+          '<div class="jadwal-group">' +
+          '<button type="submit" class="jadwal-btn">Update</button> ' +
+          '<button type="button" class="btn-export gray" onclick="renderKelolaJadwal()">Batal</button>' +
+          "</div>" +
+          "</form>" +
+          "</div>";
+      }
+
+      function updateJadwal(id) {
+        var data = loadJadwal();
+        var i = data.findIndex(function (j) {
+          return j.id_jadwal == id;
+        });
+        if (i < 0) return;
+        data[i].tanggal = document.getElementById("ej_tanggal").value;
+        data[i].lokasi = document.getElementById("ej_lokasi").value;
+        data[i].kegiatan = document.getElementById("ej_kegiatan").value;
+        saveJadwal(data);
+        alert("Jadwal berhasil diupdate");
+        renderKelolaJadwal();
+      }
+
+      /* ============================================================
+         LAPORAN
+         ============================================================ */
+      function renderLaporan() {
+        var pasien = loadPasien();
+        var jadwal = loadJadwal();
+
+        var laki = pasien.filter(function (p) {
+          return p.jenis_kelamin === "Laki-laki";
+        }).length;
+        var perempuan = pasien.filter(function (p) {
+          return p.jenis_kelamin === "Perempuan";
+        }).length;
+
+        var opsiJadwal = '<option value="">-- Semua Jadwal --</option>';
+        jadwal.forEach(function (j) {
+          opsiJadwal +=
+            '<option value="' +
+            j.id_jadwal +
+            '">' +
+            formatTanggal(j.tanggal) +
+            " - " +
+            j.lokasi +
+            "</option>";
+        });
+
+        var rows = "";
+        if (!pasien.length) {
+          rows =
+            '<tr><td colspan="8" style="text-align:center;">Data tidak ditemukan</td></tr>';
+        } else {
+          pasien.forEach(function (p, i) {
+            var j = jadwal.find(function (x) {
+              return x.id_jadwal == p.id_jadwal;
+            });
+            rows +=
+              "<tr>" +
+              "<td>" +
+              (i + 1) +
+              "</td>" +
+              "<td>" +
+              p.nik +
+              "</td>" +
+              "<td>" +
+              p.nama +
+              "</td>" +
+              "<td>" +
+              p.jenis_kelamin +
+              "</td>" +
+              "<td>" +
+              (j ? j.lokasi : "-") +
+              "</td>" +
+              "<td>" +
+              (p.kecamatan || "-") +
+              "</td>" +
+              "<td>" +
+              (j ? formatTanggal(j.tanggal) : "-") +
+              "</td>" +
+              "<td>" +
+              (p.diinput_oleh || "-") +
+              "</td>" +
+              "</tr>";
+          });
+        }
+
+        document.getElementById("dashboardContent").innerHTML =
+          "<h2>Laporan Data Pasien</h2>" +
+          '<div class="laporan-filter">' +
+          '<select id="filterTahun"><option value="">-- Tahun --</option><option value="2026">2026</option><option value="2025">2025</option></select>' +
+          '<select id="filterJadwal">' +
+          opsiJadwal +
+          "</select>" +
+          '<button class="btn-filter" onclick="filterLaporan()">Filter</button>' +
+          "</div>" +
+          '<div class="stat-cards">' +
+          '<div class="stat-card blue">' +
+          "<h3>Total Pasien</h3>" +
+          "<h1>" +
+          pasien.length +
+          "</h1>" +
+          "</div>" +
+          '<div class="stat-card green">' +
+          "<h3>Laki-laki</h3>" +
+          "<h1>" +
+          laki +
+          "</h1>" +
+          "</div>" +
+          '<div class="stat-card purple">' +
+          "<h3>Perempuan</h3>" +
+          "<h1>" +
+          perempuan +
+          "</h1>" +
+          "</div>" +
+          "</div>" +
+          '<div class="laporan-table-wrap">' +
+          '<table class="laporan-table">' +
+          "<thead>" +
+          "<tr>" +
+          "<th>No</th><th>NIK</th><th>Nama</th><th>JK</th>" +
+          "<th>Lokasi</th><th>Kecamatan</th><th>Tanggal</th><th>Penginput</th>" +
+          "</tr>" +
+          "</thead>" +
+          '<tbody id="tbodyLaporan">' +
+          rows +
+          "</tbody>" +
+          "</table>" +
+          "</div>" +
+          '<div class="laporan-footer">' +
+          '<button class="btn-export pdf" onclick="cetakLaporan()">Cetak PDF</button>' +
+          "</div>";
+      }
+
+      function filterLaporan() {
+        var tahun = document.getElementById("filterTahun").value;
+        var idJadwal = document.getElementById("filterJadwal").value;
+        var pasien = loadPasien();
+        var jadwal = loadJadwal();
+
+        var filtered = pasien.filter(function (p) {
+          var j = jadwal.find(function (x) {
+            return x.id_jadwal == p.id_jadwal;
+          });
+          var matchTahun = true;
+          var matchJadwal = true;
+
+          if (tahun && j) {
+            matchTahun = j.tanggal.startsWith(tahun);
+          }
+          if (idJadwal) {
+            matchJadwal = p.id_jadwal == idJadwal;
+          }
+          return matchTahun && matchJadwal;
+        });
+
+        var rows = "";
+        if (!filtered.length) {
+          rows =
+            '<tr><td colspan="8" style="text-align:center;">Data tidak ditemukan</td></tr>';
+        } else {
+          filtered.forEach(function (p, i) {
+            var j = jadwal.find(function (x) {
+              return x.id_jadwal == p.id_jadwal;
+            });
+            rows +=
+              "<tr>" +
+              "<td>" +
+              (i + 1) +
+              "</td>" +
+              "<td>" +
+              p.nik +
+              "</td>" +
+              "<td>" +
+              p.nama +
+              "</td>" +
+              "<td>" +
+              p.jenis_kelamin +
+              "</td>" +
+              "<td>" +
+              (j ? j.lokasi : "-") +
+              "</td>" +
+              "<td>" +
+              (p.kecamatan || "-") +
+              "</td>" +
+              "<td>" +
+              (j ? formatTanggal(j.tanggal) : "-") +
+              "</td>" +
+              "<td>" +
+              (p.diinput_oleh || "-") +
+              "</td>" +
+              "</tr>";
+          });
+        }
+        document.getElementById("tbodyLaporan").innerHTML = rows;
+      }
+
+      function cetakLaporan() {
+        var pasien = loadPasien();
+        var rows = "";
+        pasien.forEach(function (p, i) {
+          rows +=
+            "<tr>" +
+            "<td>" +
+            (i + 1) +
+            "</td><td>" +
+            p.nik +
+            "</td><td>" +
+            p.nama +
+            "</td><td>" +
+            formatTanggal(p.tanggal_lahir) +
+            "</td>" +
+            "<td>" +
+            p.jenis_kelamin +
+            "</td><td>" +
+            (p.agama || "-") +
+            "</td><td>" +
+            (p.alamat || "-") +
+            "</td>" +
+            "<td>" +
+            (p.desa_kelurahan || "-") +
+            "</td><td>" +
+            (p.kecamatan || "-") +
+            "</td><td>" +
+            (p.kabupaten_kota || "-") +
+            "</td>" +
+            "<td>" +
+            p.status_pemeriksaan +
+            "</td><td>" +
+            (p.diinput_oleh || "-") +
+            "</td>" +
+            "</tr>";
+        });
+        var html =
+          "<html><head><title>Laporan Pasien</title>" +
+          "<style>" +
+          'body { font-family:"Times New Roman",serif; margin:20px; }' +
+          "h2,h3 { text-align:center; margin:0; }" +
+          "hr { margin:15px 0; }" +
+          "table { width:100%; border-collapse:collapse; font-size:10px; }" +
+          "th,td { border:1px solid black; padding:5px; text-align:center; }" +
+          "th { background:#eee; }" +
+          "</style></head><body>" +
+          "<h2>LAPORAN KEGIATAN</h2>" +
+          "<h3>Program Layanan Kesehatan Gratis</h3>" +
+          "<h3>Djalaluddin Pane Foundation</h3><hr>" +
+          "<table>" +
+          "<tr><th>No</th><th>NIK</th><th>Nama</th><th>Tgl Lahir</th><th>JK</th><th>Agama</th>" +
+          "<th>Alamat</th><th>Desa</th><th>Kecamatan</th><th>Kabupaten</th><th>Status</th><th>Penginput</th></tr>" +
+          (rows || '<tr><td colspan="12">Belum ada data</td></tr>') +
+          "</table>" +
+          '<p style="margin-top:15px;"><b>Jumlah Pasien : ' +
+          pasien.length +
+          " Orang</b></p>" +
+          "</body></html>";
+        var win = window.open("", "", "width=900,height=650");
+        win.document.write(html);
+        win.document.close();
+        win.print();
+      }
+
+      /* ============================================================
+         HELPER
+         ============================================================ */
+      function formatTanggal(s) {
+        if (!s) return "-";
+        var d = new Date(s);
+        if (isNaN(d)) return s;
+        var bln = [
+          "Jan",
+          "Feb",
+          "Mar",
+          "Apr",
+          "Mei",
+          "Jun",
+          "Jul",
+          "Ags",
+          "Sep",
+          "Okt",
+          "Nov",
+          "Des",
+        ];
+        return d.getDate() + " " + bln[d.getMonth()] + " " + d.getFullYear();
+      }
+
+      /* ============================================================
+         INIT
+         ============================================================ */
+      document.addEventListener("DOMContentLoaded", function () {
+        loadJadwal();
+        renderJadwalIndex();
+      });
+    </script>
+  </body>
+</html>
